@@ -424,7 +424,7 @@ class WebWorker {
         }
     }
 
-    async restoreBook(bookUid, libFolder, libFile, downFileName) {
+    async restoreBook(bookUid, libFolder, libFile, downFileName, bookSeries, bookSerno) {
         const db = this.db;
 
         let extractedFile = '';
@@ -451,7 +451,7 @@ class WebWorker {
                 await utils.touchFile(bookFile);
             }
 
-            await fs.writeFile(bookFileDesc, JSON.stringify({libFolder, libFile, downFileName}));
+            await fs.writeFile(bookFileDesc, JSON.stringify({libFolder, libFile, downFileName, bookSeries, bookSerno}));
         } else {
             if (extractedFile)
                 await fs.remove(extractedFile);
@@ -507,6 +507,8 @@ class WebWorker {
 
             const libFolder = book.folder;
             const libFile = `${book.file}${ext}`;
+            const bookSeries = book.series;
+            const bookSerno = book.serno;
 
             //найдем хеш
             rows = await db.select({table: 'file_hash', where: `@@id(${db.esc(bookUid)})`});
@@ -521,7 +523,7 @@ class WebWorker {
             }
 
             if (!link) {
-                link = await this.restoreBook(bookUid, libFolder, libFile, downFileName);
+                link = await this.restoreBook(bookUid, libFolder, libFile, downFileName, bookSeries, bookSerno);
             }
 
             if (!link)

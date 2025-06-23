@@ -26,7 +26,10 @@
   "bin": "server/index.js",
   "pkg": {
     "scripts": "server/config/*.js",
-    "assets": "dist/public.json"
+    "assets": [
+      "dist/public.json",
+      "./node_modules/axios/dist/node/axios.cjs"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.24.3",

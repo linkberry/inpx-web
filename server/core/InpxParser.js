@@ -159,9 +159,10 @@ class InpxParser {
 
             if (!rec.folder)
                 // FBD collections are stored in separate zip files
-                if (path.extname(rec.file) == '.zip')
+                if (path.extname(rec.file) == '.zip') {
                     rec.folder = rec.file;
                     rec.file = path.basename(rec.file, '.zip');
+                }
                 else
                     rec.folder = defaultFolder;
 

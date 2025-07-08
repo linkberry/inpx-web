@@ -509,6 +509,8 @@ class WebWorker {
             const libFile = `${book.file}${ext}`;
             const bookSeries = book.series;
             const bookSerno = book.serno;
+            console.log(libFolder);
+            console.log(libFile);
 
             //найдем хеш
             rows = await db.select({table: 'file_hash', where: `@@id(${db.esc(bookUid)})`});

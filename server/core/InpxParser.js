@@ -158,7 +158,11 @@ class InpxParser {
             }
 
             if (!rec.folder)
-                rec.folder = defaultFolder;
+                // FBD collections are stored in separate zip files
+                if (path.extname(rec.file) == '.zip')
+                    rec.folder = rec.file;
+                else
+                    rec.folder = defaultFolder;
 
             rec.serno = parseInt(rec.serno, 10) || 0;
             rec.size = parseInt(rec.size, 10) || 0;

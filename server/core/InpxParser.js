@@ -170,6 +170,9 @@ class InpxParser {
             rec.insno = parseInt(rec.insno, 10) || 0;
             rec.librate = parseInt(rec.librate, 10) || 0;
 
+            console.log(req.folder)
+            console.log(req.file)
+            console.log(req.ext)
             //пушим
             this.chunk.push(rec);
 

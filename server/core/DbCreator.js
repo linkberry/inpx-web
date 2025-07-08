@@ -625,9 +625,6 @@ class DbCreator {
             for (const id of @all()) {
                 const r = @row(id);
                 const file = ${"`${r.folder}/${r.file}.${r.ext}`"};
-                console.log(r.folder);
-                console.log(r.file);
-                console.log(r.ext);
                 if (!r.del) {
                     files.add(file);
                 } else {

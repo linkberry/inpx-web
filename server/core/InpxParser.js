@@ -59,7 +59,7 @@ class InpxParser {
         return result;
     }
 
-    async parse(inpxFile, readFileCallback, parsedCallback) {
+    async parse(inpxFile, libFbd, readFileCallback, parsedCallback) {
         if (!readFileCallback)
             readFileCallback = async() => {};
 
@@ -107,7 +107,7 @@ class InpxParser {
             for (const inpFile of inpFiles) {
                 await readFileCallback({fileName: inpFile, current: ++current});
                 
-                await this.parseInp(zipReader, inpFile, structure, parsedCallback);
+                await this.parseInp(zipReader, inpFile, libFbd, structure, parsedCallback);
             }
 
             if (this.chunk.length) {
@@ -119,7 +119,7 @@ class InpxParser {
         }
     }
 
-    async parseInp(zipReader, inpFile, structure, parsedCallback) {
+    async parseInp(zipReader, inpFile, libFbd, structure, parsedCallback) {
         const inpBuf = await zipReader.extractToBuf(inpFile);
         const rows = inpBuf.toString().split('\n');
 
@@ -158,7 +158,7 @@ class InpxParser {
             }
 
             if (!rec.folder)
-                if (config.libFbd)
+                if (libFbd)
                     // fbd books are stored in separate zip files
                     // fb2 books are located in libDir
                     if (path.extname(rec.file) == '.zip') {

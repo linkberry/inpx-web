@@ -15,6 +15,7 @@ module.exports = {
     logDir: '',
     libDir: '',
     inpx: '',
+    libFbd: false,
     inpxFilterFile: '',
     externalToolsConfig: '',
     external: '',

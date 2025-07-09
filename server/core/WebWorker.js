@@ -397,7 +397,10 @@ class WebWorker {
 
         libFolder = libFolder.replace(/\\/g, '/').replace(/\/\//g, '/');
 
-        const folder = `${this.config.libDir}/${libFolder}`;
+        if (this.config.libFbd && !libFolder)
+            const folder = this.config.libDir;
+        else
+            const folder = `${this.config.libDir}/${libFolder}`;
         const file = libFile;
         
         const fullPath = `${folder}/${file}`;

@@ -266,7 +266,7 @@ class DbCreator {
 
         //парсинг
         const parser = new InpxParser();
-        await parser.parse(config.inpxFile, readFileCallback, parsedCallback);        
+        await parser.parse(config.inpxFile, config.libFbd, readFileCallback, parsedCallback);        
 
         //чистка памяти, ибо жрет как не в себя
         authorMap = null;

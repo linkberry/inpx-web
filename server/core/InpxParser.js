@@ -157,12 +157,25 @@ class InpxParser {
                 rec.genre = rec.genre.split(':').filter(s => s).join(',');
             }
 
-            if (!rec.folder)
-                // FBD collections are stored in separate zip files
+            // FBD collections are stored in separate zip files
+            if (config.libFbd)
                 if (path.extname(rec.file) == '.zip') {
                     rec.folder = rec.file;
                     rec.file = path.basename(rec.file, '.zip');
                 }
+                else
+                    rec.folder = rec.file;
+            
+            if (!rec.folder)
+                if (config.libFbd)
+                    // fbd books are stored in separate zip files
+                    // fb2 books are located in libDir
+                    if (path.extname(rec.file) == '.zip') {
+                        rec.folder = rec.file;
+                        rec.file = path.basename(rec.file, '.zip');
+                    }
+                    else
+                        rec.folder = '';
                 else
                     rec.folder = defaultFolder;
 

@@ -10,6 +10,7 @@ const propsToSave = [
     'logDir',
     'libDir',
     'inpx',
+    'libFbd',
     'inpxFilterFile',
     'externalToolsConfig',
     'allowConfigRewrite',
